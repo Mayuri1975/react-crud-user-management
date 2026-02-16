@@ -1,8 +1,30 @@
-import axios from "axios";
+const STORAGE_KEY = "users";
 
-const API_URL = "https://6992e4728f29113acd3f42a1.mockapi.io/users";
+export const getUsers = async () => {
+  const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  return { data: users };
+};
 
-export const getUsers = () => axios.get(API_URL);
-export const createUser = (data) => axios.post(API_URL, data);
-export const updateUser = (id, data) => axios.put(`${API_URL}/${id}`, data);
-export const deleteUser = (id) => axios.delete(`${API_URL}/${id}`);
+export const createUser = async (user) => {
+  const users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  const newUser = { ...user, id: Date.now().toString() };
+  users.push(newUser);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+  return { data: newUser };
+};
+
+export const updateUser = async (id, updatedUser) => {
+  let users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  users = users.map((user) =>
+    user.id === id ? { ...updatedUser, id } : user
+  );
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+  return { data: updatedUser };
+};
+
+export const deleteUser = async (id) => {
+  let users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  users = users.filter((user) => user.id !== id);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+  return { data: id };
+};
