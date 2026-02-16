@@ -1,18 +1,3 @@
 {
-  "users": [
-    {
-      "id": "48a3",
-      "firstName": "Mayuri",
-      "lastName": "Sure",
-      "email": "suremayuri063@gmail.com",
-      "phone": "8805888276"
-    },
-    {
-      "id": "92c0",
-      "firstName": "chinu",
-      "lastName": "chi",
-      "phone": "1234567890",
-      "email": "sure@gmail.com"
-    }
-  ]
+  "users": []
 }
